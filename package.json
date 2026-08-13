@@ -1,0 +1,20 @@
+{
+  "name": "priority-one-driving-review",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Web form that fills the Harris County Constable Precinct Five Priority One Driving Review PDF and emails the completed PDF.",
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch server.js",
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^5.1.0",
+    "nodemailer": "^6.9.16",
+    "pdf-lib": "^1.17.1"
+  }
+}

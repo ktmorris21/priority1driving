@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Priority One Driving Review</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <main class="shell">
+    <section class="card">
+      <header>
+        <p class="eyebrow">Harris County Constable Precinct Five</p>
+        <h1>Priority One Driving Review</h1>
+        <p class="intro">Complete the event information below. The submitted values will be placed into the official review PDF.</p>
+      </header>
+
+      <form id="reviewForm">
+        <fieldset>
+          <legend>Employee</legend>
+          <div class="grid two">
+            <label class="span-2">Employee Name
+              <input name="employeeName" autocomplete="name" required>
+            </label>
+            <label>Employee PID
+              <input name="employeePid" required>
+            </label>
+            <label>Unit #
+              <input name="unit" required>
+            </label>
+            <label>Shift
+              <input name="shift">
+            </label>
+            <label>Shop #
+              <input name="shop">
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Event</legend>
+          <div class="grid two">
+            <label>Event Date
+              <input type="date" name="eventDate" required>
+            </label>
+            <label>Event Time
+              <input type="time" name="eventTime" required>
+            </label>
+            <label class="span-2">Incident #
+              <input name="incident" required>
+            </label>
+            <label class="span-2">Event Type
+              <input name="eventType" required>
+            </label>
+            <label class="span-2">Event Address
+              <input name="eventAddress" autocomplete="street-address" required>
+            </label>
+          </div>
+        </fieldset>
+
+        <div class="actions">
+          <button type="submit" id="submitButton">Submit Review</button>
+        </div>
+
+        <div id="status" class="status" role="status" aria-live="polite"></div>
+      </form>
+    </section>
+  </main>
+
+  <script src="/app.js" defer></script>
+</body>
+</html>
