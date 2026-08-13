@@ -17,11 +17,7 @@ export async function createCompletedPdf(data) {
     form.getTextField(pdfFieldName).setText(data[dataKey] ?? '');
   }
 
-  // Only the fields we populate are flattened. This preserves the lower
-  // portion of the original form for later supervisor completion.
-  // pdf-lib's form.flatten() would flatten every field in the document, so
-  // we intentionally leave the PDF interactive for now.
-  form.updateFieldAppearances();
-
-  return Buffer.from(await pdfDoc.save());
+  return Buffer.from(
+    await pdfDoc.save({ updateFieldAppearances: false })
+  );
 }
