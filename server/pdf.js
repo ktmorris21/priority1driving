@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { PDFDocument } from 'pdf-lib';
+import { PDFDocument, AcroTextFlags } from 'pdf-lib';
 import { PDF_FIELD_MAP } from '../config/fields.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -13,11 +13,15 @@ export async function createCompletedPdf(data) {
   const pdfDoc = await PDFDocument.load(templateBytes);
   const form = pdfDoc.getForm();
 
+  // Fix template field that is incorrectly marked as rich text
+  const text2 = form.getTextField('Text2');
+  text2.acroField.setFlagTo(AcroTextFlags.RichText, false);
+
   for (const [dataKey, pdfFieldName] of Object.entries(PDF_FIELD_MAP)) {
     form.getTextField(pdfFieldName).setText(data[dataKey] ?? '');
   }
-
+  console.log("bp");
   return Buffer.from(
-    await pdfDoc.save({ updateFieldAppearances: false })
+    await pdfDoc.save({ updateFieldAppearances: true })
   );
 }
