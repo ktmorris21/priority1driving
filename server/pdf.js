@@ -18,6 +18,6 @@ export async function createCompletedPdf(data) {
   }
 
   return Buffer.from(
-    await pdfDoc.save({ updateFieldAppearances: false })
+    await pdfDoc.save({ updateFieldAppearances: true })
   );
 }
