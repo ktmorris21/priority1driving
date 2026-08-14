@@ -17,5 +17,7 @@ export async function createCompletedPdf(data) {
     form.getTextField(pdfFieldName).setText(data[dataKey] ?? '');
   }
 
-  return Buffer.from(await pdfDoc.save());
+  return Buffer.from(
+    await pdfDoc.save({ updateFieldAppearances: false })
+  );
 }
