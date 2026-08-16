@@ -5,7 +5,8 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 export async function sendSubmissionEmail({
   pdfBuffer,
   filename,
-  submissionId
+  submissionId,
+  shift
 }) {
   if (process.env.EMAIL_MODE !== 'resend') {
     console.log(
@@ -14,7 +15,28 @@ export async function sendSubmissionEmail({
     return;
   }
 
-  const recipient = process.env.TEST_RECIPIENT;
+  let recipients = '';
+
+  if (shift === 'days') {
+    recipients = process.env.DAYS_RECIPIENT;
+  }
+  else if (shift === 'evenings') {
+    recipients = process.env.EVENINGS_RECIPIENT;
+  }
+  else if (shift === 'nights') {
+    recipients = process.env.NIGHTS_RECIPIENT;
+  }
+  else if (shift === 'supervisors') {
+    recipients = process.env.SUPERVISORS_RECIPIENT;
+  }
+  else {
+    throw new Error('Unrecognized shift');
+  }
+
+  const recipient = recipients
+  ?.split(',')
+  .map(email => email.trim())
+  .filter(Boolean);
 
   if (!recipient) {
     throw new Error('TEST_RECIPIENT is not configured.');
@@ -22,7 +44,7 @@ export async function sendSubmissionEmail({
 
   const { data, error } = await resend.emails.send({
     from: process.env.MAIL_FROM,
-    to: [recipient],
+    to: recipient,
     subject: `Priority One Driving Review - ${submissionId}`,
     text:
       `A Priority One Driving Review has been submitted.\n\n` +

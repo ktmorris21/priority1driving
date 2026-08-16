@@ -25,13 +25,15 @@ app.post('/api/submit', async (req, res) => {
 
   try {
     const data = validateSubmission(req.body);
+    let shift = data.shift;
 
     const pdfBuffer = await createCompletedPdf(data);
 
     await sendSubmissionEmail({
       pdfBuffer,
       filename: `Priority-One-Driving-Review-${submissionId}.pdf`,
-      submissionId
+      submissionId,
+      shift
     });
 
     console.log(`[${submissionId}] Submission completed.`);
