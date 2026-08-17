@@ -25,7 +25,7 @@ app.post('/api/submit', async (req, res) => {
 
   try {
     const data = validateSubmission(req.body);
-    let shift = data.shift;
+    let reviewGroup = data.reviewGroup;
 
     const pdfBuffer = await createCompletedPdf(data);
 
@@ -33,7 +33,7 @@ app.post('/api/submit', async (req, res) => {
       pdfBuffer,
       filename: `Priority-One-Driving-Review-${submissionId}.pdf`,
       submissionId,
-      shift
+      reviewGroup
     });
 
     console.log(`[${submissionId}] Submission completed.`);

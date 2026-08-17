@@ -6,7 +6,7 @@ export async function sendSubmissionEmail({
   pdfBuffer,
   filename,
   submissionId,
-  shift
+  reviewGroup
 }) {
   if (process.env.EMAIL_MODE !== 'resend') {
     console.log(
@@ -17,20 +17,20 @@ export async function sendSubmissionEmail({
 
   let recipients = '';
 
-  if (shift === 'days') {
+  if (reviewGroup === 'days') {
     recipients = process.env.DAYS_RECIPIENT;
   }
-  else if (shift === 'evenings') {
+  else if (reviewGroup === 'evenings') {
     recipients = process.env.EVENINGS_RECIPIENT;
   }
-  else if (shift === 'nights') {
+  else if (reviewGroup === 'nights') {
     recipients = process.env.NIGHTS_RECIPIENT;
   }
-  else if (shift === 'supervisors') {
+  else if (reviewGroup === 'supervisors') {
     recipients = process.env.SUPERVISORS_RECIPIENT;
   }
   else {
-    throw new Error('Unrecognized shift');
+    throw new Error('Unrecognized Review Group');
   }
 
   const recipient = recipients

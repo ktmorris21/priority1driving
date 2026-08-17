@@ -19,15 +19,22 @@
         <fieldset>
           <legend>Employee</legend>
           <div class="grid two">
-            <label class="span-2">Employee Name
+
+            <label class="span-2">
+              Employee Name
               <input name="employeeName" autocomplete="name" required>
             </label>
-            <label>Employee PID
+
+            <label>
+              Employee C5 Number
               <input name="employeePid" required>
             </label>
-            <label>Unit #
+
+            <label>
+              Unit #
               <input name="unit" required>
             </label>
+
             <label>
               Shift
               <select name="shift" required>
@@ -35,33 +42,57 @@
                 <option value="days">Days</option>
                 <option value="evenings">Evenings</option>
                 <option value="nights">Nights</option>
-                <option value="supervisors">Supervisors</option>
               </select>
             </label>
-            <label>Shop #
+
+            <label>
+              Send to Review Group
+              <select name="reviewGroup" required>
+                <option value="">Select review group...</option>
+                <option value="days">Day Supervisors</option>
+                <option value="evenings">Evening Supervisors</option>
+                <option value="nights">Night Supervisors</option>
+                <option value="supervisors">8520 (for Supervisors)</option>
+              </select>
+            </label>
+
+            <label class="span-2">
+              Shop #
               <input name="shop">
             </label>
+
           </div>
         </fieldset>
 
         <fieldset>
           <legend>Event</legend>
           <div class="grid two">
-            <label>Event Date
+
+            <label>
+              Event Date
               <input type="date" name="eventDate" required>
             </label>
-            <label>Event Time
+
+            <label>
+              Event Time
               <input type="time" name="eventTime" required>
             </label>
-            <label class="span-2">Incident #
+
+            <label class="span-2">
+              Incident #
               <input name="incident" required>
             </label>
-            <label class="span-2">Event Type
+
+            <label class="span-2">
+              Event Type
               <input name="eventType" required>
             </label>
-            <label class="span-2">Event Address
+
+            <label class="span-2">
+              Event Address
               <input name="eventAddress" autocomplete="street-address" required>
             </label>
+
           </div>
         </fieldset>
 

@@ -18,6 +18,7 @@ export const FORM_FIELDS = [
   'employeePid',
   'unit',
   'shift',
+  'reviewGroup',
   'shop',
   'eventDate',
   'eventTime',
