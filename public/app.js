@@ -2,6 +2,17 @@ const form = document.querySelector('#reviewForm');
 const status = document.querySelector('#status');
 const submitButton = document.querySelector('#submitButton');
 
+const eventDateInput = document.querySelector('input[name="eventDate"]');
+
+if (eventDateInput && !eventDateInput.value) {
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, '0');
+  const day = String(today.getDate()).padStart(2, '0');
+
+  eventDateInput.value = `${year}-${month}-${day}`;
+}
+
 form.addEventListener('submit', async (event) => {
   event.preventDefault();
 

@@ -6,7 +6,10 @@ import { PDF_FIELD_MAP } from '../config/fields.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const TEMPLATE_PATH = path.resolve(__dirname, '../templates/priority-one-driving-review.pdf');
+const TEMPLATE_PATH = path.resolve(
+  __dirname,
+  '../templates/priority-one-driving-review.pdf'
+);
 
 export async function createCompletedPdf(data) {
   const templateBytes = await fs.readFile(TEMPLATE_PATH);
@@ -18,9 +21,17 @@ export async function createCompletedPdf(data) {
   text2.acroField.setFlagTo(AcroTextFlags.RichText, false);
 
   for (const [dataKey, pdfFieldName] of Object.entries(PDF_FIELD_MAP)) {
-    form.getTextField(pdfFieldName).setText(data[dataKey] ?? '');
+    let value = data[dataKey] ?? '';
+
+    // Convert HTML date format (YYYY-MM-DD) to PDF format (MM/DD/YYYY)
+    if (dataKey === 'eventDate' && value) {
+      const [year, month, day] = value.split('-');
+      value = `${month}/${day}/${year}`;
+    }
+
+    form.getTextField(pdfFieldName).setText(value);
   }
-  console.log("bp");
+
   return Buffer.from(
     await pdfDoc.save({ updateFieldAppearances: true })
   );
