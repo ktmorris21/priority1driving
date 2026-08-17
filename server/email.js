@@ -27,7 +27,7 @@ export async function sendSubmissionEmail({
     recipients = process.env.NIGHTS_RECIPIENT;
   }
   else if (reviewGroup === 'supervisors') {
-    recipients = process.env.SUPERVISORS_RECIPIENT;
+    recipients = process.env.SGT_RECIPIENT;
   }
   else {
     throw new Error('Unrecognized Review Group');
